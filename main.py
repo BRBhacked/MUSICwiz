@@ -32,9 +32,9 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 #Implementing kmeans using pipelines
-cluster_pipeline = Pipeline([("scalar",StandardScaler),("kmeans",KMeans(n_clusters = 10, n_jobs = -1))])
+cluster_pipeline = Pipeline([("scaler",StandardScaler()),("kmeans",KMeans(n_clusters = 10))])
 cluster_pipeline.fit(X)
-genre_data["clusters"] = cluster_pipeline.predict(X)
+genre_data["cluster"] = cluster_pipeline.predict(X)
 
 #Visualising the pipelines implementation of genere clusters into  a two dimensional space 
 from sklearn.manifold import TSNE
