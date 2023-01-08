@@ -32,7 +32,7 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 #Implementing kmeans using pipelines
-cluster_pipeline = Pipeline([("scalar",StandardScaler()),("kmeans",KMeans(n_clusters = 10, n_jobs = -1))])
+cluster_pipeline = Pipeline([("scaler",StandardScaler()),("kmeans",KMeans(n_clusters = 10))])
 cluster_pipeline.fit(X)
 genre_data["cluster"] = cluster_pipeline.predict(X)
 
@@ -56,10 +56,10 @@ fig = px.scatter(
 fig.show()
 
 #Clustering songs with Kmeans
+
 song_cluster_pipeline = Pipeline([('scaler',StandardScaler),('kmeans',KMeans(n_clusters=20,verbose=2))])
 X = spotify_data.select_dtypes(np.number)#only selects the numbers
 song_cluster_pipeline.fit(X)
 song_cluster_labels = song_cluster_pipeline.predict(X)
 spotify_data["cluster_label"] = song_cluster_labels
-=======
 fig.show()
