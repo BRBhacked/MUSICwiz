@@ -49,3 +49,5 @@ projection = pd.DataFrame(columns=['x', 'y'], data=genre_embedding)
 #Updating values of generes and clusters from the kmeans implementation rather than from the 2D implementaion.
 projection['genres'] = genre_data['genres']
 projection['cluster'] = genre_data['cluster']
+
+#Using plotply function to plot the 2D projection created above.
