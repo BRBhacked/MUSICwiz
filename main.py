@@ -40,3 +40,8 @@ genre_data["clusters"] = cluster_pipeline.predict(X)
 
 from sklearn.manifold import TSNE
 
+tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=2))])
+genre_embedding = tsne_pipeline.fit_transform(X)
+projection = pd.DataFrame(columns=['x', 'y'], data=genre_embedding)
+projection['genres'] = genre_data['genres']
+projection['cluster'] = genre_data['cluster']
