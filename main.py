@@ -54,3 +54,12 @@ projection['cluster'] = genre_data['cluster']
 fig = px.scatter(
     projection, x='x', y='y', color='cluster', hover_data=['x', 'y', 'genres'])
 fig.show()
+
+#Clustering songs with Kmeans
+song_cluster_pipeline = Pipeline([('scaler',StandardScaler),('kmeans',KMeans(n_clusters=20,verbose=2))])
+X = spotify_data.select_dtypes(np.number)#only selects the numbers
+song_cluster_pipeline.fit(X)
+song_cluster_labels = song_cluster_pipeline.predict(X)
+spotify_data["cluster_label"] = song_cluster_labels
+=======
+fig.show()
