@@ -30,7 +30,7 @@ X = genre_data.select_dtypes(np.number)
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-
+#implementing kmeans
 cluster_pipeline = Pipeline([("scalar",StandardScaler),("kmeans",KMeans(n_clusters = 10, n_jobs = -1))])
 cluster_pipeline.fit(X)
 genre_data["clusters"] = cluster_pipeline.predict(X)
