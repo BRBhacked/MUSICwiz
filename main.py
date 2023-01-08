@@ -22,6 +22,7 @@ sound_features = ['acousticness', 'danceability', 'energy', 'instrumentalness', 
 fig = px.line(data_by_year, x='year', y=sound_features)
 fig.show()
 
+#We are using plotly to visualise (Using a graph) the values of different generes.
 top10_genres = genre_data.nlargest(10, 'popularity')
 fig = px.bar(top10_genres, x='genres', y=['valence', 'energy', 'danceability', 'acousticness'], barmode='group')
 fig.show()
@@ -30,7 +31,9 @@ X = genre_data.select_dtypes(np.number)
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-#implementing kmeans
+#implementing kmeans using pipelines
 cluster_pipeline = Pipeline([("scalar",StandardScaler),("kmeans",KMeans(n_clusters = 10, n_jobs = -1))])
 cluster_pipeline.fit(X)
 genre_data["clusters"] = cluster_pipeline.predict(X)
+
+
