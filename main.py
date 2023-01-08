@@ -37,11 +37,15 @@ cluster_pipeline.fit(X)
 genre_data["clusters"] = cluster_pipeline.predict(X)
 
 #Visualising the pipelines implementation of genere clusters into  a two dimensional space 
-
 from sklearn.manifold import TSNE
 
+#Initialising a new dataset with a two dimensional pipeline.
 tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=2))])
 genre_embedding = tsne_pipeline.fit_transform(X)
+
+#Creating a panda object to implement a 2-dimensional labeled data structure.
 projection = pd.DataFrame(columns=['x', 'y'], data=genre_embedding)
+
+#Updating values of generes and clusters from the kmeans implementation rather than from the 2D implementaion.
 projection['genres'] = genre_data['genres']
 projection['cluster'] = genre_data['cluster']
