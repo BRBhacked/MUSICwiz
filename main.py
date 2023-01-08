@@ -51,3 +51,6 @@ projection['genres'] = genre_data['genres']
 projection['cluster'] = genre_data['cluster']
 
 #Using plotply function to plot the 2D projection created above.
+fig = px.scatter(
+    projection, x='x', y='y', color='cluster', hover_data=['x', 'y', 'genres'])
+fig.show()
