@@ -40,7 +40,7 @@ genre_data["cluster"] = cluster_pipeline.predict(X)
 from sklearn.manifold import TSNE
 
 #Initialising a new dataset with a two dimensional pipeline.
-tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=2))])
+tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=2),verbose = True)])
 genre_embedding = tsne_pipeline.fit_transform(X)
 
 #Creating a panda object to implement a 2-dimensional labeled data structure.
@@ -57,7 +57,7 @@ fig.show()
 
 #Clustering songs with Kmeans
 
-song_cluster_pipeline = Pipeline([('scaler',StandardScaler),('kmeans',KMeans(n_clusters=20,verbose=2))])
+song_cluster_pipeline = Pipeline([('scaler',StandardScaler()),('kmeans',KMeans(n_clusters=20,verbose=2))])
 X = spotify_data.select_dtypes(np.number)#only selects the numbers
 
 song_cluster_pipeline.fit(X)
@@ -65,7 +65,7 @@ song_cluster_labels = song_cluster_pipeline.predict(X)
 spotify_data["cluster_label"] = song_cluster_labels
 
 #Visualising the pipelines implementation of Songs clusters into  a two dimensional space using PCA
-#agrim chutiya hai 
+
 from sklearn.manifold import TSNE
 tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=2))])
 song_embedding = tsne_pipeline.fit_transform(X)
