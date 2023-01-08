@@ -92,4 +92,3 @@ import plotly.express as px
 #Using the fig variable to plot a scatter plot
 fig = px.scatter(projection, x='x', y='y', color='cluster', hover_data=['x', 'y', 'title'])
 fig.show()
-#hi 
