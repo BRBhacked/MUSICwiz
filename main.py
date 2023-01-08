@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import spotipy
 import os
+import sklearn
 
 #Reading the dataset files
 spotify_data = pd.read_csv('./data/data.csv.zip')
@@ -24,3 +25,10 @@ fig.show()
 top10_genres = genre_data.nlargest(10, 'popularity')
 fig = px.bar(top10_genres, x='genres', y=['valence', 'energy', 'danceability', 'acousticness'], barmode='group')
 fig.show()
+
+X = genre_data.select_dtypes(np.number)
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+
+
