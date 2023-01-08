@@ -107,5 +107,6 @@ def get_song_data(song,spotify_data):
         song_data = spotify_data[(spotify_data['name'] == song['name']) 
                                 & (spotify_data['year'] == song['year'])].iloc[0]
         return song_data
-    except:
+    except IndexError:
         pass
+    
