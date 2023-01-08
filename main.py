@@ -59,13 +59,13 @@ fig.show()
 
 song_cluster_pipeline = Pipeline([('scaler',StandardScaler),('kmeans',KMeans(n_clusters=20,verbose=2))])
 X = spotify_data.select_dtypes(np.number)#only selects the numbers
-number_cols = list(X.columns)
+
 song_cluster_pipeline.fit(X)
 song_cluster_labels = song_cluster_pipeline.predict(X)
 spotify_data["cluster_label"] = song_cluster_labels
 
 #Visualising the pipelines implementation of Songs clusters into  a two dimensional space using PCA
-
+#agrim chutiya hai 
 from sklearn.manifold import TSNE
 tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=2))])
 song_embedding = tsne_pipeline.fit_transform(X)
