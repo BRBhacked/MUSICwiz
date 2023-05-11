@@ -1,8 +1,43 @@
-#BRB
-Hacked 2023
-Creating an amazing music recommendation system using a sample dataset from Spotify 
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-1. Spotify keeps track of metadata and audio features for songs that we can use to build music recommendation systems.
-2. We use a spotipy which is a python spotify web client API for developers to fetch data from spotify.
-3. In this Hackathon we have demonstrated how you can use this data to build a simple content-based music recommender system with the cosine distance metric.
+# Prerequisites
+You will need to have the following packages installed:
 
+spotipy
+pandas
+numpy
+sklearn
+
+You can install these packages using pip: pip install spotipy pandas numpy sklearn
+
+# Installing
+
+Clone the repository to your local machine: git clone https://github.com/your-username/music-recommender-system.git
+
+You will also need to register your application on the Spotify developer website and obtain a client_id and client_secret. These will be used to authenticate your requests to the Spotify API.
+
+# Running the code
+
+The code can be run using the following command: python music_recommender.py
+
+## Built With
+
+1. Spotipy - Python library for the Spotify Web API
+2. Pandas - Library for data manipulation and analysis
+3. Numpy - Library for numerical computations
+4. Scikit-learn - Machine learning library
+
+# Authors
+* Aryaman - https://github.com/araina25
+* Agrim - https://github.com/aggi000
+* Falak - https://github.com/fa1ak
+
+# License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+# Acknowledgments
+
+- Spotify for providing the sample dataset and API access.
+- Hackathon organizers for the opportunity to participate and showcase our skills.
