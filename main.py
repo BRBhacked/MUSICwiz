@@ -93,6 +93,38 @@ import plotly.express as px
 fig = px.scatter(projection, x='x', y='y', color='cluster', hover_data=['x', 'y', 'title'])
 fig.show()
 
+from spotipy.oauth2 import SpotifyClientCredentials
+from collections import defaultdict
+
+auth_manager = SpotifyClientCredentials(client_id=os.environ["SPOTIFY_CLIENT_ID"],
+                                        client_secret=os.environ["SPOTIFY_CLIENT_SECRET"])
+sp = spotipy.Spotify(auth_manager=auth_manager)
+
+def fetch_song_data(name, year):
+    """
+    This function returns a dictionary with data for a song given the name and release year.
+    The function uses Spotipy to fetch audio features and metadata for the specified song.
+    """
+    song_data = defaultdict()
+    results = sp.search(q= 'track: {} year: {}'.format(name, year), limit=1)
+    
+    if not results['tracks']['items']:
+        return None
+    
+    results = results['tracks']['items'][0]
+    track_id = results['id']
+    audio_features = sp.audio_features(track_id)[0]
+    
+    song_data['name'] = [name]
+    song_data['year'] = [year]
+    song_data['explicit'] = [int(results['explicit'])]
+    song_data['duration_ms'] = [results['duration_ms']]
+    song_data['popularity'] = [results['popularity']]
+    
+    for key, value in audio_features.items():
+        song_data[key] = value
+    
+    return dict(song_data)
 
 from collections import defaultdict
 from scipy.spatial.distance import cdist
@@ -100,13 +132,58 @@ import difflib
 number_cols = ['valence','year','acousticness', 'danceability', 'duration_ms', 'energy', 'explicit',
  'instrumentalness', 'key', 'liveness', 'loudness', 'mode', 'popularity', 'speechiness', 'tempo']
 
-def get_song_data(song,spotify_data)
-'''gets all the song details for the selected songs.
-Song takes in input as key value pairs dictionary in form of name and year'''
+def get_song_data(song, spotify_data):
+    '''gets all the song details for the selected songs.
+    Song takes in input as key value pairs dictionary in form of name and year'''
     try:
         song_data = spotify_data[(spotify_data['name'] == song['name']) 
                                 & (spotify_data['year'] == song['year'])].iloc[0]
         return song_data
     
     except IndexError:
-        return find_song(song['name'], song['year'])
+        return fetch_song_data(song['name'], song['year']) 
+
+
+
+def get_mean_vector(song_list, spotify_data):
+    """Gets the mean vector for a list of songs"""
+    song_vectors = []
+    for song in song_list:
+        song_data = get_song_data(song,spotify_data)
+        if song_data is None:
+            print("Warning, Does not exist in spotify database".format(song['name']))
+            continue
+        song_vector = song_data[number_cols].values
+        song_vectors.append(song_vector)
+        song_matrix = np.array(list(song_vectors))
+        return np.mean(song_matrix, axis = 0)
+
+from collections import defaultdict
+def flatten_dict_list(dict_list):
+    
+    """Utility function for flattening a list of dictionaries"""
+
+    flattened_dict = defaultdict(list)
+    for dictionary in dict_list:
+        for key, value in dictionary.items():
+            flattened_dict[key].append(value)
+    return dict(flattened_dict)
+
+
+def recommend_songs(song_list, spotify_data, song_cluster_pipeline, n_songs=10):
+    """
+    Recommends songs based on a list of previous songs that a user has listened to.
+    """
+    metadata_cols = ['name', 'year', 'artists']
+    song_dict = flatten_dict_list(song_list)
+
+    song_center = get_mean_vector(song_list, spotify_data)
+    scaler = song_cluster_pipeline['scaler']
+    scaled_data = scaler.transform(spotify_data[song_cluster_pipeline['number_cols']])
+
+
+recommend_songs([{'name': 'Come As You Are', 'year':1991},
+                {'name': 'Smells Like Teen Spirit', 'year': 1991},
+                {'name': 'Lithium', 'year': 1992},
+                {'name': 'All Apologies', 'year': 1993},
+                {'name': 'Stay Away', 'year': 1993}],  spotify_data)
