@@ -1,43 +1,85 @@
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+# 🎧 MusicWiz
 
-# Prerequisites
-You will need to have the following packages installed:
+**MusicWiz** is a machine learning-powered music recommendation system built during a hackathon by a team of three. It leverages Spotify’s Web API and unsupervised learning techniques to demonstrate how intelligent music recommendations can be generated using user behavior and track features.
 
-spotipy
-pandas
-numpy
-sklearn
+---
 
-You can install these packages using pip: pip install spotipy pandas numpy sklearn
+## 🚀 Getting Started
 
-# Installing
+These instructions will help you set up and run the project locally for development and testing.
 
-Clone the repository to your local machine: git clone https://github.com/your-username/music-recommender-system.git
+### 🔧 Prerequisites
 
-You will also need to register your application on the Spotify developer website and obtain a client_id and client_secret. These will be used to authenticate your requests to the Spotify API.
+Ensure you have Python installed along with the following libraries:
 
-# Running the code
+- `spotipy`
+- `pandas`
+- `numpy`
+- `scikit-learn`
 
-The code can be run using the following command: python music_recommender.py
+You can install them using pip:
 
-## Built With
+```bash
+pip install spotipy pandas numpy scikit-learn
+````
 
-1. Spotipy - Python library for the Spotify Web API
-2. Pandas - Library for data manipulation and analysis
-3. Numpy - Library for numerical computations
-4. Scikit-learn - Machine learning library
+Additionally, register an app at the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) to obtain the following credentials:
 
-# Authors
-* Aryaman - https://github.com/araina25
-* Agrim - https://github.com/aggi000
-* Falak - https://github.com/fa1ak
+* `client_id`
+* `client_secret`
 
-# License
+These are required to authenticate API requests to Spotify.
 
-This project is licensed under the MIT License - see the LICENSE.md file for details
+---
 
-# Acknowledgments
+## 📦 Installation
 
-- Spotify for providing the sample dataset and API access.
-- Hackathon organizers for the opportunity to participate and showcase our skills.
+Clone this repository:
+
+```bash
+git clone https://github.com/your-username/music-recommender-system.git
+cd music-recommender-system
+```
+
+---
+
+## ▶️ Running the Code
+
+Run the main script:
+
+```bash
+python music_recommender.py
+```
+
+Follow the prompts to authenticate via Spotify, and the system will begin analyzing your listening data to recommend similar tracks based on feature clustering.
+
+---
+
+## 🛠 Built With
+
+* [Spotipy](https://spotipy.readthedocs.io/) – Python client for the Spotify Web API
+* [Pandas](https://pandas.pydata.org/) – For data manipulation
+* [NumPy](https://numpy.org/) – For numerical operations
+* [Scikit-learn](https://scikit-learn.org/) – For clustering and machine learning
+
+---
+
+## 👨‍💻 Authors
+
+* [Aryaman](https://github.com/araina25)
+* [Agrim](https://github.com/aggi000)
+* [Falak](https://github.com/fa1ak)
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE.md).
+
+---
+
+## Acknowledgments
+
+* Thanks to **Spotify** for providing access to their API and datasets.
+* Big appreciation to the **hackathon organizers** for the platform to build and innovate.
+
